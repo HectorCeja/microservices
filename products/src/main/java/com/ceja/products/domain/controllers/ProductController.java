@@ -1,0 +1,55 @@
+package com.ceja.products.domain.controllers;
+
+import com.ceja.products.domain.applications.ProductApplication;
+import com.ceja.products.domain.entities.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+@RestController
+public class ProductController {
+
+   @Autowired
+   private ProductApplication productApplication;
+
+   @Autowired
+   private Environment environment;
+
+   @Value("${server.port}")
+   private Integer port;
+
+   public ProductController(){}
+
+   @GetMapping("/name/{name}")
+   public Product findProductByName(@PathVariable("name") String name) {
+      Product product = this.productApplication.findByName(name);
+      product.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+      return product;
+   }
+
+   @GetMapping("/{id}")
+   public Product findProductById(@PathVariable("id") Long id) throws InterruptedException {
+      if(id > 10L) {
+         throw new IllegalStateException("The product is not found");
+      } else if(id.equals(7L)) {
+         TimeUnit.SECONDS.sleep(5L);
+      }
+      Product product = this.productApplication.findById(id);
+      product.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+      return product;
+   }
+
+   @GetMapping("/list")
+   public List<Product> findAll() {
+      return this.productApplication.getAll().stream().map(product -> {
+         product.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
+         return product;
+      }).collect(Collectors.toList());
+   }
+
+}
