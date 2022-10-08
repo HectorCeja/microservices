@@ -9,15 +9,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class ItemController {
 
    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+   @Value("${configuration.text}")
+   private String text;
 
    @Autowired
    @Qualifier("serviceRestTemplate")
@@ -41,6 +49,14 @@ public class ItemController {
    @GetMapping("/name/{name}")
    public Item getByName(@PathVariable("name") String name) {
       return itemService.findByName(name);
+   }
+
+   @GetMapping("/get-config")
+   public ResponseEntity<?> getConfig(@Value("${server.port}") String port) {
+      Map<String, String> info = new HashMap<>();
+      info.put("text", text);
+      info.put("port", port);
+      return new ResponseEntity<Map<String, String>>(info, HttpStatus.OK);
    }
 
    public CompletableFuture<Item> alternativeMethod(Long id, Integer quantity, Throwable exception) {
