@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +18,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
 public class ItemController {
 
    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+   @Autowired
+   private Environment environment;
 
    @Value("${configuration.text}")
    private String text;
@@ -56,6 +61,12 @@ public class ItemController {
       Map<String, String> info = new HashMap<>();
       info.put("text", text);
       info.put("port", port);
+
+      if(environment.getActiveProfiles().length > 0 && Objects.equals(environment.getActiveProfiles()[0], "dev")) {
+         info.put("user.name", environment.getProperty("configuration.user.name"));
+         info.put("user.email",  environment.getProperty("configuration.user.email"));
+      }
+
       return new ResponseEntity<Map<String, String>>(info, HttpStatus.OK);
    }
 
