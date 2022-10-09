@@ -5,6 +5,7 @@ import com.ceja.products.domain.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,6 +51,24 @@ public class ProductController {
          product.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
          return product;
       }).collect(Collectors.toList());
+   }
+
+   @PostMapping("/add")
+   @ResponseStatus(HttpStatus.CREATED)
+   public Product save(@RequestBody Product product) {
+      return this.productApplication.save(product);
+   }
+
+   @PutMapping("/edit/{id}")
+   @ResponseStatus(HttpStatus.CREATED)
+   public Product editProduct(@PathVariable("id") Long id, @RequestBody Product product) throws Exception {
+      return this.productApplication.updateProduct(id, product);
+   }
+
+   @DeleteMapping("/remove")
+   @ResponseStatus(HttpStatus.NO_CONTENT)
+   public void deleteProduct(@RequestParam("id") Long id) {
+      this.productApplication.deleteById(id);
    }
 
 }

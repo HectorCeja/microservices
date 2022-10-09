@@ -36,4 +36,29 @@ public class ProductApplication {
       return product.orElseGet(() -> this.productRepository.findById(id).get());
    }
 
+   @Transactional
+   public Product save(Product product) {
+      return this.productRepository.save(product);
+   }
+
+   @Transactional
+   public void deleteById(Long id) {
+      this.productRepository.deleteById(id);
+   }
+
+   @Transactional
+   public Product updateProduct(Long id, Product product) throws Exception {
+      Optional<Product> savedProduct = this.productRepository.findById(id);
+      Product productToUpdate;
+      if(savedProduct.isPresent()) {
+         productToUpdate = savedProduct.get();
+         productToUpdate.setName(product.getName());
+         productToUpdate.setPrice(product.getPrice());
+         this.productRepository.save(productToUpdate);
+      } else {
+         throw new Exception("The product not exists");
+      }
+      return productToUpdate;
+   }
+
 }
