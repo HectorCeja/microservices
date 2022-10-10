@@ -65,9 +65,9 @@ public class ProductController {
       return this.productApplication.updateProduct(id, product);
    }
 
-   @DeleteMapping("/remove")
+   @DeleteMapping("/remove/{id}")
    @ResponseStatus(HttpStatus.NO_CONTENT)
-   public void deleteProduct(@RequestParam("id") Long id) {
+   public void deleteProduct(@PathVariable("id") Long id) {
       this.productApplication.deleteById(id);
    }
 

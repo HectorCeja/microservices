@@ -2,6 +2,7 @@ package com.ceja.items.domain.services;
 
 import com.ceja.items.clients.ProductClientREST;
 import com.ceja.items.domain.models.Item;
+import com.ceja.items.domain.models.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,20 @@ public class ItemServiceFeign implements ItemService {
    @Override
    public Item findByName(String name) {
       return new Item(productClientREST.getByName(name), 1);
+   }
+
+   @Override
+   public ProductDTO save(ProductDTO productDTO) {
+      return  productClientREST.save(productDTO);
+   }
+
+   @Override
+   public ProductDTO editProduct(Long id, ProductDTO productDTO) {
+      return productClientREST.editProduct(id, productDTO);
+   }
+
+   @Override
+   public void deleteProduct(Long id) {
+      productClientREST.deleteProduct(id);
    }
 }

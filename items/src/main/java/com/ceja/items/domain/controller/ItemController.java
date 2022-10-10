@@ -35,8 +35,26 @@ public class ItemController {
    private String text;
 
    @Autowired
-   @Qualifier("serviceRestTemplate")
+   @Qualifier("serviceFeign")
    private ItemService itemService;
+
+   @PostMapping("/create")
+   @ResponseStatus(HttpStatus.CREATED)
+   public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
+      return itemService.save(productDTO);
+   }
+
+   @PutMapping("/edit/{id}")
+   @ResponseStatus(HttpStatus.CREATED)
+   public ProductDTO createProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO) {
+      return itemService.editProduct(id, productDTO);
+   }
+
+   @DeleteMapping("/delete/{id}")
+   @ResponseStatus(HttpStatus.NO_CONTENT)
+   public void deleteProduct(@PathVariable("id") Long id) {
+      itemService.deleteProduct(id);
+   }
 
    @GetMapping("/list")
    public List<Item> getAll(@RequestParam(name = "name", required = false) String name,
