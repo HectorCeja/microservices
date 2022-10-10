@@ -1,7 +1,7 @@
 package com.ceja.items.domain.controller;
 
+import ceja.commons.models.entities.Product;
 import com.ceja.items.domain.models.Item;
-import com.ceja.items.domain.models.ProductDTO;
 import com.ceja.items.domain.services.ItemService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -40,14 +40,14 @@ public class ItemController {
 
    @PostMapping("/create")
    @ResponseStatus(HttpStatus.CREATED)
-   public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
-      return itemService.save(productDTO);
+   public Product createProduct(@RequestBody Product Product) {
+      return itemService.save(Product);
    }
 
    @PutMapping("/edit/{id}")
    @ResponseStatus(HttpStatus.CREATED)
-   public ProductDTO createProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDTO) {
-      return itemService.editProduct(id, productDTO);
+   public Product createProduct(@PathVariable("id") Long id, @RequestBody Product Product) {
+      return itemService.editProduct(id, Product);
    }
 
    @DeleteMapping("/delete/{id}")
@@ -93,12 +93,12 @@ public class ItemController {
    public CompletableFuture<Item> alternativeMethod(Long id, Integer quantity, Throwable exception) {
       logger.info("Product service has failed due to: " + exception.getMessage());
       Item item = new Item();
-      ProductDTO productDTO = new ProductDTO();
-      productDTO.setName("Sony");
-      productDTO.setId(id);
-      productDTO.setPrice(500.00);
+      Product Product = new Product();
+      Product.setName("Sony");
+      Product.setId(id);
+      Product.setPrice(500.00);
       item.setQuantity(quantity);
-      item.setProduct(productDTO);
+      item.setProduct(Product);
       return CompletableFuture.supplyAsync(() -> item);
    }
 

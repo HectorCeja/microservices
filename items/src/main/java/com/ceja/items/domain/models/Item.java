@@ -1,24 +1,26 @@
 package com.ceja.items.domain.models;
 
+import ceja.commons.models.entities.Product;
+
 public class Item {
 
-   private ProductDTO product;
+   private Product product;
 
    private Integer quantity;
 
    public Item() {
    }
 
-   public Item(ProductDTO product, Integer quantity) {
+   public Item(Product product, Integer quantity) {
       this.product = product;
       this.quantity = quantity;
    }
 
-   public ProductDTO getProduct() {
+   public Product getProduct() {
       return product;
    }
 
-   public void setProduct(ProductDTO product) {
+   public void setProduct(Product product) {
       this.product = product;
    }
 

@@ -1,7 +1,8 @@
 rootProject.name = 'microservices'
 include 'products'
 include 'items'
-include 'Eureka'
-include 'Gateway'
+include 'eureka'
+include 'gateway'
 include 'config-server'
+include 'commons'
 

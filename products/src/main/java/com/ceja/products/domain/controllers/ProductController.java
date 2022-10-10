@@ -1,7 +1,7 @@
 package com.ceja.products.domain.controllers;
 
+import ceja.commons.models.entities.Product;
 import com.ceja.products.domain.applications.ProductApplication;
-import com.ceja.products.domain.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;

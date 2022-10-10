@@ -1,21 +1,21 @@
 package com.ceja.items.domain.services;
 
+import ceja.commons.models.entities.Product;
 import com.ceja.items.domain.models.Item;
-import com.ceja.items.domain.models.ProductDTO;
 
 import java.util.List;
 
 public interface ItemService {
 
-   public List<Item> findAll();
+   List<Item> findAll();
 
-   public Item findById(Long id, Integer quantity);
+   Item findById(Long id, Integer quantity);
 
-   public Item findByName(String name);
+   Item findByName(String name);
 
-   ProductDTO save(ProductDTO productDTO);
+   Product save(Product product);
 
-   ProductDTO editProduct(Long id, ProductDTO productDTO);
+   Product editProduct(Long id, Product product);
 
    void deleteProduct(Long id);
 }

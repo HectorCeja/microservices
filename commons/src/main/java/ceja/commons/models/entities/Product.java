@@ -1,4 +1,4 @@
-package com.ceja.products.domain.entities;
+package ceja.commons.models.entities;
 
 
 import lombok.Data;

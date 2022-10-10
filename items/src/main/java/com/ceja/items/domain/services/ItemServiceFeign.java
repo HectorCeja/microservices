@@ -1,8 +1,8 @@
 package com.ceja.items.domain.services;
 
+import ceja.commons.models.entities.Product;
 import com.ceja.items.clients.ProductClientREST;
 import com.ceja.items.domain.models.Item;
-import com.ceja.items.domain.models.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class ItemServiceFeign implements ItemService {
 
    @Override
    public List<Item> findAll() {
-      return productClientREST.getAll().stream().map(productDTO ->  new Item(productDTO, 1)).collect(Collectors.toList());
+      return productClientREST.getAll().stream().map(Product ->  new Item(Product, 1)).collect(Collectors.toList());
    }
 
    @Override
@@ -33,13 +33,13 @@ public class ItemServiceFeign implements ItemService {
    }
 
    @Override
-   public ProductDTO save(ProductDTO productDTO) {
-      return  productClientREST.save(productDTO);
+   public Product save(Product Product) {
+      return  productClientREST.save(Product);
    }
 
    @Override
-   public ProductDTO editProduct(Long id, ProductDTO productDTO) {
-      return productClientREST.editProduct(id, productDTO);
+   public Product editProduct(Long id, Product Product) {
+      return productClientREST.editProduct(id, Product);
    }
 
    @Override
