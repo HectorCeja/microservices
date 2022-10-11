@@ -31,6 +31,12 @@ spring:
             - AddRequestHeader=token-request,itemTokenRequest
             - AddResponseHeader=response-token-response,itemTokenResponse
             - AddRequestParameter=name,hector
+        - id: users-service
+          uri: lb://users-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=2
         - id: products-service
           uri: lb://products-service
           predicates:
