@@ -6,4 +6,5 @@ include 'eureka'
 include 'gateway'
 include 'config-server'
 include 'commons'
+include 'oauth'
 
