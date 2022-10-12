@@ -1,4 +1,4 @@
-package com.ceja.gateway.oauth;
+package com.ceja.gateway.security;
 
 /*
 import org.springframework.beans.factory.annotation.Autowired;

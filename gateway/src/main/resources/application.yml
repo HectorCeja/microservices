@@ -49,7 +49,7 @@ spring:
           uri: lb://products-service
           predicates:
             - Path=/api/products/**
-            - Header= token, \d+
+            #- Header= token, \d+
             - Method=GET, POST, PUT, DELETE
           filters:
             - name: CircuitBreaker
