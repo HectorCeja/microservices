@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -15,6 +16,10 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 
     @Override
     public void publishAuthenticationSuccess(Authentication authentication) {
+        //only validate user credentials, ignoring app credentials
+        if(authentication.getDetails() instanceof WebAuthenticationDetails) {
+            return;
+        }
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         logger.info("Success login: " + userDetails.getUsername());
     }
