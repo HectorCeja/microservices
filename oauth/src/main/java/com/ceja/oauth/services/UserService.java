@@ -2,6 +2,7 @@ package com.ceja.oauth.services;
 
 import ceja.commons.models.entities.User;
 import com.ceja.oauth.clients.UserFeignClient;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,11 @@ public class UserService implements UserDetailsService, IUserService {
     @Override
     public User findByUserName(String userName) {
         return userFeignClient.findByUserName(userName);
+    }
+
+    @Override
+    public User update(User user, Long id) {
+        return userFeignClient.update(user, id);
     }
 
 }
