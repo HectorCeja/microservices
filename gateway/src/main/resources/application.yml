@@ -37,6 +37,14 @@ spring:
             - Path=/api/users/**
           filters:
             - StripPrefix=2
+        - id: oauth-service
+          uri: lb://oauth-service
+          predicates:
+            - Path=/api/security/**
+          filters:
+            - StripPrefix=2
+            - RemoveRequestHeader=Cookie
+            - RemoveRequestHeader=Set-Cookie
         - id: products-service
           uri: lb://products-service
           predicates:
