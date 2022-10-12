@@ -1,13 +1,18 @@
 package com.ceja.gateway.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
 public class SpringSecurityConfig {
+
+    @Autowired
+    private JWTAuthenticationFilter authenticationFilter;
 
     @Bean
     public SecurityWebFilterChain configure(ServerHttpSecurity httpSecurity) {
@@ -22,7 +27,8 @@ public class SpringSecurityConfig {
                 .pathMatchers(HttpMethod.GET, "/api/users/users/{id}").hasAnyRole("ADMIN", "USER")
                 .pathMatchers("/api/products/**", "/api/users/users/**", "/api/items/**").hasRole("ADMIN")
                 .anyExchange().authenticated()
-                .and().csrf().disable()
+                .and().addFilterAt(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION) //here is the filter for the token
+                .csrf().disable()
                 .build();
     }
 
