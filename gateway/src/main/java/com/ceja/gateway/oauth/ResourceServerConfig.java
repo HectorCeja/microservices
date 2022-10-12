@@ -1,5 +1,6 @@
 package com.ceja.gateway.oauth;
 
+/*
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -24,12 +25,12 @@ import org.springframework.web.filter.CorsFilter;
 import javax.jws.soap.SOAPBinding;
 import java.util.Arrays;
 
-//@Configuration
+@Configuration
 @RefreshScope
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    /*@Value("${config.security.oauth.jwt.key}")
+    @Value("${config.security.oauth.jwt.key}")
     private String jwtKey;
 
     @Autowired
@@ -81,6 +82,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
         filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return filter;
-    }*/
+    }
 
 }
+*/
+public class ResourceServerConfig {}
