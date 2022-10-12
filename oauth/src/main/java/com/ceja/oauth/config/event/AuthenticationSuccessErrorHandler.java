@@ -21,7 +21,6 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 
     @Override
     public void publishAuthenticationFailure(AuthenticationException exception, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         logger.error("Login failed: " + exception.getMessage());
     }
 }
