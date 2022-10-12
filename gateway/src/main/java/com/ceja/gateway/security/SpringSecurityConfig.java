@@ -21,10 +21,9 @@ public class SpringSecurityConfig {
                 .pathMatchers(HttpMethod.GET,
                         "/api/products/list",
                         "/api/items/list",
-                        "/api/products/{id}",
                         "/api/items/{id}/detail/quantity/{quantity}",
                         "/api/users/users").permitAll()
-                .pathMatchers(HttpMethod.GET, "/api/users/users/{id}").hasAnyRole("ADMIN", "USER")
+                .pathMatchers(HttpMethod.GET, "/api/users/users/{id}", "/api/products/{id}").hasAnyRole("ADMIN", "USER")
                 .pathMatchers("/api/products/**", "/api/users/users/**", "/api/items/**").hasRole("ADMIN")
                 .anyExchange().authenticated()
                 .and().addFilterAt(authenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION) //here is the filter for the token
