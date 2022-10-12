@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableEurekaClient
 @SpringBootApplication
-@EntityScan({"ceja.commons.models.entities"})
+@EntityScan({"ceja.commons.models.entities.products"})
 @EnableAutoConfiguration(exclude = { DataSourceAutoConfiguration.class })
 public class ItemsApplication {
 
