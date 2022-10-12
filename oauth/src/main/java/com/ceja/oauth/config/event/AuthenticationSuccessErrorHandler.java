@@ -1,6 +1,6 @@
 package com.ceja.oauth.config.event;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 import com.ceja.oauth.services.IUserService;
 import feign.FeignException;
 import org.slf4j.Logger;

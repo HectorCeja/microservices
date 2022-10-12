@@ -1,6 +1,6 @@
 package com.ceja.oauth.clients;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

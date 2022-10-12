@@ -1,6 +1,6 @@
 package com.ceja.oauth.services;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 
 public interface IUserService {
 

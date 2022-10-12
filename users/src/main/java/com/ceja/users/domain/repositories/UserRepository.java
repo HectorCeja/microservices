@@ -1,6 +1,6 @@
 package com.ceja.users.domain.repositories;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

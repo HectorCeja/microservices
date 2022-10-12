@@ -1,6 +1,6 @@
 package com.ceja.items.domain.services;
 
-import ceja.commons.models.entities.Product;
+import ceja.commons.models.entities.products.Product;
 import com.ceja.items.domain.models.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

@@ -1,6 +1,6 @@
 package com.ceja.items.clients;
 
-import ceja.commons.models.entities.Product;
+import ceja.commons.models.entities.products.Product;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

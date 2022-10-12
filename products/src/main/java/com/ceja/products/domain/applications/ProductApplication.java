@@ -1,6 +1,6 @@
 package com.ceja.products.domain.applications;
 
-import ceja.commons.models.entities.Product;
+import ceja.commons.models.entities.products.Product;
 import com.ceja.products.domain.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.ceja.items.domain.models;
 
-import ceja.commons.models.entities.Product;
+import ceja.commons.models.entities.products.Product;
 
 public class Item {
 

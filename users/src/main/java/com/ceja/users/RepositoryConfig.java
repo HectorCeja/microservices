@@ -1,7 +1,7 @@
 package com.ceja.users;
 
-import ceja.commons.models.entities.Role;
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.Role;
+import ceja.commons.models.entities.users.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;

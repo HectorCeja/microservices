@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan( {"ceja.commons.models.entities"} )
+@EntityScan( {"ceja.commons.models.entities.users"} )
 public class UsersApplication {
 
     public static void main(String[] args) {

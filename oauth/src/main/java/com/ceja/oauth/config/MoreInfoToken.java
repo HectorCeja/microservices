@@ -1,6 +1,6 @@
 package com.ceja.oauth.config;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 import com.ceja.oauth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;

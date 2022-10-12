@@ -1,6 +1,6 @@
 package com.ceja.items.domain.controller;
 
-import ceja.commons.models.entities.Product;
+import ceja.commons.models.entities.products.Product;
 import com.ceja.items.domain.models.Item;
 import com.ceja.items.domain.services.ItemService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;

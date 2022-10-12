@@ -1,4 +1,4 @@
-package ceja.commons.models.entities;
+package ceja.commons.models.entities.users;
 
 import lombok.Data;
 

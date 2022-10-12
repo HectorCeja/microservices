@@ -1,8 +1,7 @@
 package com.ceja.oauth.services;
 
-import ceja.commons.models.entities.User;
+import ceja.commons.models.entities.users.User;
 import com.ceja.oauth.clients.UserFeignClient;
-import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
