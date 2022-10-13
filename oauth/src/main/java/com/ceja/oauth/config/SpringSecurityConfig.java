@@ -1,6 +1,5 @@
 package com.ceja.oauth.config;
 
-import com.ceja.oauth.config.event.AuthenticationSuccessErrorHandler;
 import com.ceja.oauth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
