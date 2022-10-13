@@ -1,0 +1,121 @@
+version: '3.7'
+services:
+  config-server:
+    image: config-server:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - microservices-project
+  eureka-service:
+    image: eureka-service:v1
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      - microservices-project
+  mysql8-service:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    restart: always
+    networks:
+      - microservices-project
+    environment:
+      MYSQL_DATABASE: db_springboot_cloud
+      MYSQL_ROOT_PASSWORD: sasa
+  postgresql-12-service:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - microservices-project
+    environment:
+      POSTGRES_DB: db_springboot_cloud
+      POSTGRES_PASSWORD: sasa
+  products-service:
+    image: products-service:v1
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - mysql8-service
+  products-service2:
+    image: products-service:v1
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - mysql8-service
+  items-service:
+    image: items-service:v1
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - products-service
+  rabbitmq11-service:
+    image: rabbitmq:3.11-management-alpine
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    restart: always
+    networks:
+      - microservices-project
+  users-service:
+    image: users-service:v1
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - postgresql-12-service
+  oauth-service:
+    image: oauth-service:v1
+    ports:
+      - "9100:9100"
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - users-service
+  gateway-service:
+    image: gateway-service:v1
+    ports:
+      - "8090:8090"
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - config-server
+      - eureka-service
+      - products-service
+      - items-service
+  zipkin-service:
+    image: zipkin-service:v1
+    ports:
+      - "9411:9411"
+    restart: always
+    networks:
+      - microservices-project
+    depends_on:
+      - rabbitmq11-service
+      - mysql8-service
+    environment:
+      RABBIT_ADDRESSES: rabbitmq11-service:5672
+      STORAGE_TYPE: mysql
+      MYSQL_USER: zipkin
+      MYSQL_PASS: zipkin
+      MYSQL_HOST: mysql8-service
+networks:
+  microservices-project:
