@@ -1,12 +1,20 @@
 plugins {
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'java'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+ext {
+    set('springCloudVersion', "2021.0.4")
+}
+
+group = 'com.ceja'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
