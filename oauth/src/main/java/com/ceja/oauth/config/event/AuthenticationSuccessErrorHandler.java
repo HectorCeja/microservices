@@ -1,5 +1,6 @@
 package com.ceja.oauth.config.event;
 
+import brave.Tracer;
 import ceja.commons.models.entities.users.User;
 import com.ceja.oauth.services.IUserService;
 import feign.FeignException;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Component;
 public class AuthenticationSuccessErrorHandler implements AuthenticationEventPublisher {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private Tracer tracer;
 
     @Autowired
     private IUserService userService;
@@ -40,20 +44,29 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
     @Override
     public void publishAuthenticationFailure(AuthenticationException exception, Authentication authentication) {
         logger.error("Login failed: " + exception.getMessage());
+        StringBuilder errors = new StringBuilder();
         try {
+
+            errors.append("Login failed: " + exception.getMessage() + " - ");
             User user = userService.findByUserName(authentication.getName());
             int tries = user.getTries() == null ? 0 : user.getTries();
             logger.info("Actual try: " + user.getTries());
+
             user.setTries(tries + 1);
+            errors.append("Actual try: " + user.getTries() + " - ");
 
             if (user.getTries() >= 3) {
-                logger.error("User has reached his maximum tries, is now disabled ");
+                logger.error("User has reached his maximum tries, is now disabled: " + user.getTries());
+                errors.append("User has reached his maximum tries, is now disabled:" + user.getTries() + " - ");
                 user.setEnabled(false);
             }
 
             userService.update(user, user.getId());
         } catch (FeignException e) {
+            errors.append(String.format("The user %s not exists", authentication.getName()));
             logger.error(String.format("The user %s not exists", authentication.getName()));
+        } finally {
+            tracer.currentSpan().tag("message.error", errors.toString());
         }
     }
 }
