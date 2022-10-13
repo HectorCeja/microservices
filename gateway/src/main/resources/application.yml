@@ -63,3 +63,6 @@ spring:
                 message: Hola es mi mensaje personalizado
                 cookieName: User
                 cookieValue: hcejag
+logging:
+  level:
+    org.springframework.core.codec.StringDecoder: TRACE
