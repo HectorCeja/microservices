@@ -16,6 +16,14 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
 dependencies {
     implementation project(":commons")
     implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
