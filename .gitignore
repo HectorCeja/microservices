@@ -2,7 +2,7 @@ HELP.md
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-zipkin-server-2.23.19-exec.jar
+zipkin-server/zipkin-server-2.23.19-exec.jar
 
 ### STS ###
 .apt_generated
