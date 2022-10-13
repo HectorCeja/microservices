@@ -16,6 +16,14 @@ ext {
     set('springCloudVersion', "2021.0.4")
 }
 
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
 dependencies {
     implementation project(":commons")
     implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.8.RELEASE'

@@ -17,6 +17,14 @@ repositories {
     mavenLocal()
 }
 
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
 dependencies {
     implementation project(":commons")
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

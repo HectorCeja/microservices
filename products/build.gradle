@@ -17,6 +17,14 @@ repositories {
     mavenLocal()
 }
 
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
 dependencies {
     implementation project(":commons")
     runtimeOnly 'mysql:mysql-connector-java'
